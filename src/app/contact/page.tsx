@@ -1,12 +1,83 @@
-import React from "react";
+"use client";
+
+import Footer from "@/layout/Footer";
+import axios from "axios";
+import React, { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const page = () => {
+  let [fullName, setFullname] = useState("");
+  let [email, setEmail] = useState("");
+  let [phoneNumber, setPhoneNumber] = useState("");
+  let [companyName, setCompanyName] = useState("");
+  let [message, setMessage] = useState("");
+
+
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    let data = {
+      fullName: fullName,
+      email: email,
+      phoneNumber: phoneNumber,
+      companyName: companyName,
+      message: message,
+    };
+
+    
+
+    try {
+      let result = await axios({
+        method: "POST",
+        url: "http://localhost:9000/company-form/sent-form",
+        data: data,
+      });
+      console.log(result.data);
+      toast.success(`${result.data.message}`);
+      setFullname("");
+      setEmail("");
+      setPhoneNumber("");
+      setCompanyName("");
+      setMessage("");
+    } catch (error) {}
+  };
+
+  type Contact = {
+    id: number;
+    icon: string;
+    title: string;
+    description: string;
+  };
+
+  const contacts: Contact[] = [
+    {
+      id: 1,
+      icon: "/location.png",
+      title: "Location",
+      description: "123 Main St, Anytown, USA",
+    },
+    {
+      id: 2,
+      icon: "/mobile.png",
+      title: "Phone",
+      description: "+977-9749856214",
+    },
+    {
+      id: 3,
+      icon: "/email.png",
+      title: "Email",
+      description: "prabin.shresthadev77@gmail.com",
+    },
+  ];
   return (
     <div>
-      <section className="py-10 bg-gray-100 sm:py-16 lg:py-10">
+      <ToastContainer />
+      <section className="py-10 bg-gray-100 sm:py-16 lg:py-24">
         <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
           <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl font-bold leading-tight text-blue-700 sm:text-4xl lg:text-5xl">
+            <h2 className="text-3xl font-bold leading-tight text-gray-900 sm:text-4xl lg:text-5xl">
               Contact us
             </h2>
             <p className="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-500">
@@ -16,78 +87,27 @@ const page = () => {
           </div>
 
           <div className="max-w-5xl mx-auto mt-12 sm:mt-16">
-            <div className="grid grid-cols-1 gap-6 px-8 text-center md:px-0 md:grid-cols-3">
-              <div className="overflow-hidden bg-white rounded-xl">
-                <div className="p-6">
-                  <svg
-                    className="flex-shrink-0 w-10 h-10 mx-auto text-gray-400"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="green"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1"
-                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+            <div className="grid grid-cols-1 gap-6 px-8 text-center md:px-0 md:grid md:grid-cols-3 placei">
+              {contacts.map((contact) => (
+                <div
+                  className="overflow-hidden bg-white rounded-xl"
+                  key={contact.id}
+                >
+                  <div className="p-6 flex items-center justify-center flex-col sm:flex sm:items-center sm:justify-center sm:flex-col">
+                    <img
+                      src={contact.icon}
+                      alt=""
+                      className="h-[40px] w-[40px]  "
                     />
-                  </svg>
-                  <p className="mt-6 text-lg font-medium text-gray-900">
-                    +977-9749856214
-                  </p>
+                    <p className="mt-6 text-lg font-medium text-gray-900">
+                      {contact.title}
+                    </p>
+                    <p className="mt-1 text-lg font-medium text-gray-900">
+                      {contact.description}
+                    </p>
+                  </div>
                 </div>
-              </div>
-
-              <div className="overflow-hidden bg-white rounded-xl">
-                <div className="p-6">
-                  <svg
-                    className="flex-shrink-0 w-10 h-10 mx-auto text-gray-400"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="red"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1"
-                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                    />
-                  </svg>
-                  <p className="mt-6 text-lg font-medium text-gray-900">
-                    prabin.shresthadev77@gmail.com
-                  </p>
-                </div>
-              </div>
-
-              <div className="overflow-hidden bg-white rounded-xl">
-                <div className="p-6">
-                  <svg
-                    className="flex-shrink-0 w-10 h-10 mx-auto text-gray-400"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="black"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1"
-                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1"
-                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                  </svg>
-                  <p className="mt-6 text-lg font-medium leading-relaxed text-gray-900">
-                    Budhanilkantha-9, Kapan, Kathmandu, Nepal
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
 
             <div className="mt-6 overflow-hidden bg-white rounded-xl">
@@ -95,8 +115,7 @@ const page = () => {
                 <h3 className="text-3xl font-semibold text-center text-gray-900">
                   Send us a message
                 </h3>
-
-                <form action="#" method="POST" className="mt-14">
+                <form onSubmit={handleSubmit} className="mt-14">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-4">
                     <div>
                       <label
@@ -109,8 +128,12 @@ const page = () => {
                       <div className="mt-2.5 relative">
                         <input
                           type="text"
-                          name=""
-                          id=""
+                          name="name"
+                          id="name"
+                          value={fullName}
+                          onChange={(event) => {
+                            setFullname(event.target.value);
+                          }}
                           placeholder="Enter your full name"
                           className="block w-full px-4 py-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
                         />
@@ -128,8 +151,12 @@ const page = () => {
                       <div className="mt-2.5 relative">
                         <input
                           type="email"
-                          name=""
-                          id=""
+                          name="email"
+                          id="email"
+                          value={email}
+                          onChange={(event) => {
+                            setEmail(event.target.value);
+                          }}
                           placeholder="Enter your full name"
                           className="block w-full px-4 py-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
                         />
@@ -147,8 +174,12 @@ const page = () => {
                       <div className="mt-2.5 relative">
                         <input
                           type="tel"
-                          name=""
-                          id=""
+                          name="phoneNumber"
+                          id="phonenumber"
+                          value={phoneNumber}
+                          onChange={(event) => {
+                            setPhoneNumber(event.target.value);
+                          }}
                           placeholder="Enter your full name"
                           className="block w-full px-4 py-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
                         />
@@ -166,8 +197,12 @@ const page = () => {
                       <div className="mt-2.5 relative">
                         <input
                           type="text"
-                          name=""
-                          id=""
+                          name="company"
+                          id="company"
+                          value={companyName}
+                          onChange={(event) => {
+                            setCompanyName(event.target.value);
+                          }}
                           placeholder="Enter your full name"
                           className="block w-full px-4 py-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
                         />
@@ -184,9 +219,13 @@ const page = () => {
                       </label>
                       <div className="mt-2.5 relative">
                         <textarea
-                          name=""
-                          id=""
-                          placeholder=""
+                          name="message"
+                          id="message"
+                          placeholder="message"
+                          value={message}
+                          onChange={(event) => {
+                            setMessage(event.target.value);
+                          }}
                           className="block w-full px-4 py-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md resize-y focus:outline-none focus:border-blue-600 caret-blue-600"
                           rows={4}
                         ></textarea>
@@ -208,6 +247,8 @@ const page = () => {
           </div>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 };

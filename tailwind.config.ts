@@ -1,25 +1,17 @@
-import type { Config } from "tailwindcss";
-
-export default {
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{js,ts,jsx,tsx}", // Include all files in the src folder
+    "./src/app/**/*.{js,ts,jsx,tsx}", // Include App Router files
+    "./src/components/**/*.{js,ts,jsx,tsx}", // Include component files
+    "./src/pages/**/*.{js,ts,jsx,tsx}", // Include Page Router files
   ],
   theme: {
     extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-      },
-
-      backgroundImage: {
-        background: "/background.jpg",
-      },
       fontFamily: {
         Mysuru: "Mysuru",
       },
     },
   },
   plugins: [],
-} satisfies Config;
+};

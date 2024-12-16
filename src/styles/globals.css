@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Importing Google Fonts */
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-hind-mysuru), sans-serif;
+  transition: all ease-in-out;
+  scroll-behavior: smooth;
+}
+
+/* From Uiverse.io by Kabak */
+.swiper-pagination {
+  margin-top: 50px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 300px;
+  transition: all ease-in-out;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #5264ae;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+  background-color: #ededed;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #219ebc;
+}
+::-webkit-scrollbar-button {
+  background-color: #fff;
+}

@@ -1,7 +1,8 @@
+import Navbar from "@/layout/Navbar";
+// src/app/layout.tsx (App Router)
+import "../styles/globals.css";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./styles/globals.css";
-import Navbar from "./layout/Navbar";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

@@ -1,9 +1,42 @@
-import React from "react";
+"use client";
+
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 const page = () => {
+  let [email, setEmail] = useState("");
+  let [password, setPassword] = useState("");
+  let router = useRouter();
+
+  let handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    let data = {
+      email: email,
+      password: password,
+    };
+
+    try {
+      let result = await axios({
+        method: "POST",
+        url: "http://localhost:9000/user/login",
+        data: data,
+      });
+      console.log(result);
+      let token = result.data.token;
+      localStorage.setItem("token", token);
+      setEmail("");
+      setPassword("");
+      toast.success(`${result.data.success}`);
+      router.push("/");
+    } catch (error) {}
+  };
   return (
     <div>
-      <section className="py-10 bg-gray-50 sm:py-16 lg:py-24">
+      <section className="py-10 bg-gradient-to-br from-blue-200 to-red-200 sm:py-16 lg:py-24">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">
@@ -17,7 +50,7 @@ const page = () => {
           <div className="relative max-w-md mx-auto mt-8 md:mt-16">
             <div className="overflow-hidden bg-white rounded-md shadow-md">
               <div className="px-4 py-6 sm:px-8 sm:py-7">
-                <form action="#" method="POST">
+                <form onSubmit={handleSubmit}>
                   <div className="space-y-5">
                     <div>
                       <label
@@ -47,8 +80,12 @@ const page = () => {
 
                         <input
                           type="email"
-                          name=""
-                          id=""
+                          name="email"
+                          id="email"
+                          value={email}
+                          onChange={(e) => {
+                            setEmail(e.target.value);
+                          }}
                           placeholder="Enter email to get started"
                           className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
                         />
@@ -94,8 +131,12 @@ const page = () => {
 
                         <input
                           type="password"
-                          name=""
-                          id=""
+                          name="password"
+                          id="passowrd"
+                          value={password}
+                          onChange={(e) => {
+                            setPassword(e.target.value);
+                          }}
                           placeholder="Enter your password"
                           className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
                         />
