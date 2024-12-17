@@ -11,6 +11,11 @@ const page = () => {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let router = useRouter();
+  const [inputType, setInputType] = useState("password");
+
+  const togglePasswordVisibility = () => {
+    setInputType(inputType === "password" ? "text" : "password");
+  };
 
   let handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -25,12 +30,12 @@ const page = () => {
         url: "http://localhost:9000/user/login",
         data: data,
       });
-      console.log(result);
+      console.log(result.data);
       let token = result.data.token;
       localStorage.setItem("token", token);
       setEmail("");
       setPassword("");
-      toast.success(`${result.data.success}`);
+      toast.success(`${result.data.message}`);
       router.push("/");
     } catch (error) {}
   };
@@ -50,6 +55,7 @@ const page = () => {
           <div className="relative max-w-md mx-auto mt-8 md:mt-16">
             <div className="overflow-hidden bg-white rounded-md shadow-md">
               <div className="px-4 py-6 sm:px-8 sm:py-7">
+                <ToastContainer />
                 <form onSubmit={handleSubmit}>
                   <div className="space-y-5">
                     <div>
@@ -128,9 +134,19 @@ const page = () => {
                             />
                           </svg>
                         </div>
+                        <div
+                          className="absolute right-3  top-2.5 rounded-xl  p-2  cursor-pointer"
+                          onClick={togglePasswordVisibility}
+                        >
+                          {inputType === "password" ? (
+                            <img src="/eye.png" height={20} width={20} />
+                          ) : (
+                            <img src="/closedeye.png" height={20} width={20} />
+                          )}
+                        </div>
 
                         <input
-                          type="password"
+                          type={inputType}
                           name="password"
                           id="passowrd"
                           value={password}

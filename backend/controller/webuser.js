@@ -125,7 +125,7 @@ exports.loginWebUserController = async (req, res, next) => {
 
     res.status(400).json({
       success: false,
-      message: error.message,
+      message: 'invalid credentials ',
     });
 
   }

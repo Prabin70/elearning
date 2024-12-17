@@ -46,35 +46,35 @@ const Navbar = () => {
             >
               <Link
                 href="/"
-                className="text-lg text-gray-800 dark:text-white"
+                className="text-lg hover:bg-gray-700 hover:p-2 hover:rounded-md hover:text-gray-50  text-gray-800 dark:text-white"
                 onClick={() => setMenuOpen(false)}
               >
                 Home
               </Link>
               <Link
                 href="/blogs"
-                className="text-lg text-gray-800 dark:text-white"
+                className="text-lg hover:bg-gray-700 hover:p-2 hover:rounded-md hover:text-gray-50  text-gray-800 dark:text-white"
                 onClick={() => setMenuOpen(false)}
               >
                 Blogs
               </Link>
               <Link
                 href="/courses"
-                className="text-lg text-gray-800 dark:text-white"
+                className="text-lg hover:bg-gray-700 hover:p-2 hover:rounded-md hover:text-gray-50  text-gray-800 dark:text-white"
                 onClick={() => setMenuOpen(false)}
               >
                 Courses
               </Link>
               <Link
                 href="/tutorial"
-                className="text-lg text-gray-800 dark:text-white"
+                className="text-lg hover:bg-gray-700 hover:p-2 hover:rounded-md hover:text-gray-50  text-gray-800 dark:text-white"
                 onClick={() => setMenuOpen(false)}
               >
                 Tutorial
               </Link>
               <Link
                 href="/contact"
-                className="text-lg text-gray-800 dark:text-white"
+                className="text-lg  text-gray-800 dark:text-white"
                 onClick={() => setMenuOpen(false)}
               >
                 Contact
@@ -121,7 +121,7 @@ const Navbar = () => {
                   <div className="flex flex-col md:flex-row md:justify-end md:items-center gap-0.5 md:gap-1">
                     <Link
                       className="p-2 flex items-center text-sm text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                      href="/tutorial"
+                      href="/"
                     >
                       Home
                     </Link>

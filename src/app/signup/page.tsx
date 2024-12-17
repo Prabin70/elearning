@@ -8,6 +8,11 @@ const Page = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [inputType, setInputType] = useState("password");
+
+  const togglePasswordVisibility = () => {
+    setInputType(inputType === "password" ? "text" : "password");
+  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -70,19 +75,30 @@ const Page = () => {
                         className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
                       />
                     </div>
-                    <div>
+                    <div className="relative">
+                      <div
+                        className="absolute right-3  top-2.5 rounded-xl  p-2  cursor-pointer"
+                        onClick={togglePasswordVisibility}
+                      >
+                        {inputType === "password" ? (
+                          <img src="/eye.png" height={20} width={20} />
+                        ) : (
+                          <img src="/closedeye.png" height={20} width={20} />
+                        )}
+                      </div>
                       <input
-                        type="password"
+                        type={inputType}
                         name="password"
                         value={password}
                         id="password"
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="Enter your password"
-                        className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
+                        className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600 "
                       />
                     </div>
                     <div className="flex items-center">
                       <input
+                        required
                         type="checkbox"
                         name="agree"
                         id="agree"
