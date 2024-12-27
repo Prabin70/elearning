@@ -13,8 +13,6 @@ const page = () => {
   let [companyName, setCompanyName] = useState("");
   let [message, setMessage] = useState("");
 
-
-
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -25,8 +23,6 @@ const page = () => {
       companyName: companyName,
       message: message,
     };
-
-    
 
     try {
       let result = await axios({

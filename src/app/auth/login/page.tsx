@@ -1,5 +1,4 @@
 "use client";
-
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -41,7 +40,7 @@ const page = () => {
   };
   return (
     <div>
-      <section className="py-10 bg-gradient-to-br from-blue-200 to-red-200 sm:py-16 lg:py-24">
+      <section className="py-10 bg-gradient-to-br from-blue-200 to-red-200 sm:py-16 lg:py-auto">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">
@@ -109,7 +108,7 @@ const page = () => {
                         </label>
 
                         <a
-                          href="/forgotpassword"
+                          href="/auth/forgot-password"
                           title=""
                           className="text-sm font-medium text-blue-500 transition-all duration-200 hover:text-blue-600 focus:text-blue-600 hover:underline"
                         >
@@ -172,7 +171,7 @@ const page = () => {
                       <p className="text-base text-gray-600">
                         Don’t have an account?{" "}
                         <a
-                          href="/signup"
+                          href="/auth/signup"
                           title=""
                           className="font-medium text-blue-500 transition-all duration-200 hover:text-blue-600 hover:underline"
                         >

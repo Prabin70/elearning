@@ -31,7 +31,6 @@ exports.createWebUserController = async (req, res, next) => {
 
     let token = await jwt.sign(infoObj, secretKey, expiryInfo);
 
-    //send verify message to the user in email
 
     await sendEmail({
       to: data.email,
@@ -126,6 +125,116 @@ exports.loginWebUserController = async (req, res, next) => {
     res.status(400).json({
       success: false,
       message: 'invalid credentials ',
+    });
+
+  }
+}
+
+
+exports.changePasswordController = async (req, res, next) => {
+  try {
+    let oldPassword = data.oldPassword;
+    let newPassword = data.newPassword;
+
+    let data = req.body;
+    let userId = data._id;
+    console.log(userId);
+    let result = await Webuser.findById(userId);
+    if (!result) {
+      throw new Error(`User not found`)
+    }
+
+    let isValidPassword = await bcrypt.compare(oldPassword, user.password);
+
+
+    if (isValidPassword) {
+      let hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    }
+
+    let newHashedPassword = await Webuser.findByIdAndUpdate(userId, { password: newHashedPassword }, { new: true })
+
+    res.status(200).json({
+      success: true,
+      message: "Password changed successfully",
+      newHashedPassword: newHashedPassword
+    });
+
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+
+  }
+
+}
+
+
+
+exports.forgotPasswordController = async (req, res, next) => {
+  try {
+    let data = req.body;
+    let email = data.email;
+    let user = await Webuser.findOne({ email: email });
+    if (user) {
+      let infoObj = {
+        id: user._id,
+      }
+      expiryInfo = {
+        expiresIn: "1d",
+      };
+
+      let token = await jwt.sign(infoObj, secretKey, expiryInfo);
+
+      await sendEmail({
+        to: data.email,
+        subject: "Password Reset",
+        html: `<h1>Click on the following link to reset your password</h1>
+        <a href="http://localhost:9000/user/forgot-passowrd?token=${token}">http://localhost:9000/user/forgot-password?token=${token}</a>`,
+      });
+
+      res.status(200).json({
+        success: true,
+        message: "Reset password mail sent successfully",
+        data: user,
+      });
+    }
+
+
+  } catch (error) {
+
+    res.status(500).json({
+      success: false,
+      message: 'Error sending email',
+    })
+
+  }
+}
+
+exports.resetPasswordController = async (req, res, next) => {
+  try {
+
+    let tokenString = req.headers.authorization;
+    let tokenArray = tokenString.split(" ");
+    let token = tokenArray[1];
+
+    let infoObj = await jwt.verify(token, secretKey);
+    let userId = infoObj.id;
+
+    let { newPassword } = req.body;
+    let hashedPassword = await bcrypt.hash(newPassword, 10);
+    let result = await Webuser.findByIdAndUpdate(userId, { password: hashedPassword, }, { new: true });
+    res.status(200).json({
+      success: true,
+      message: "Password reset successfully",
+      data: result,
+    });
+
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error.message,
     });
 
   }

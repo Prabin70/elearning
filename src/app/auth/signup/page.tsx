@@ -38,7 +38,7 @@ const Page = () => {
   return (
     <div>
       <ToastContainer />
-      <section className="py-10 bg-gradient-to-br from-blue-100 to-red-100 sm:py-16 lg:py-24">
+      <section className="py-10 bg-gradient-to-br from-blue-100 to-red-100 sm:py-16 lg:py-15">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">
@@ -50,7 +50,7 @@ const Page = () => {
           </div>
           <div className="relative max-w-md mx-auto mt-8 md:mt-16">
             <div className="overflow-hidden bg-white rounded-md shadow-md">
-              <div className="px-4 py-6 sm:px-8 sm:py-7">
+              <div className="px-4 py-6 sm:px-8 sm:py-5">
                 <form onSubmit={handleSubmit}>
                   <div className="space-y-5">
                     <div>
@@ -120,7 +120,7 @@ const Page = () => {
                       <p className="text-base text-gray-600">
                         Already have an account?{" "}
                         <a
-                          href="/login"
+                          href="/auth/login"
                           title=""
                           className="font-medium text-blue-500 transition-all duration-200 hover:text-blue-600 hover:underline"
                         >

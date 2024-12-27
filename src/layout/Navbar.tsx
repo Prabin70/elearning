@@ -17,7 +17,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <header className="flex flex-wrap  backdrop-blur-3xl  md:justify-start md:flex-nowrap z-50 w-full bg-white border border-gray-200 dark:border-neutral-700">
+      <header className="flex flex-wrap fixed  backdrop-blur-2xl  md:justify-start md:flex-nowrap z-50 w-full bg-gray-50 border border-gray-200 dark:border-neutral-700">
         <nav className="relative max-w-[85rem] w-full mx-auto md:flex md:items-center md:justify-between md:gap-3 py-2 px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center gap-x-1">
             <Link
@@ -25,7 +25,7 @@ const Navbar = () => {
               href="/"
               aria-label="Brand"
             >
-              <img src="/logo.webp" alt="" />
+              <img src="/logo.png" alt="" />
               <p className="text-blue-700 flex text-xl font-bold">
                 skill <span className="text-yellow-400">Sphare</span>
               </p>
@@ -82,14 +82,14 @@ const Navbar = () => {
               {!isLoggedIn ? (
                 <div className="flex flex-col gap-2 w-full">
                   <Link
-                    href="/login"
+                    href="/auth/login"
                     className="py-2 text-center rounded-md bg-blue-600 text-white hover:bg-blue-700"
                     onClick={() => setMenuOpen(false)}
                   >
                     Log in
                   </Link>
                   <Link
-                    href="/signup"
+                    href="/auth/signup"
                     className="py-2 text-center rounded-md bg-yellow-500 text-white hover:bg-yellow-600"
                     onClick={() => setMenuOpen(false)}
                   >
@@ -163,13 +163,13 @@ const Navbar = () => {
                   <div className=" flex flex-wrap items-center gap-x-1.5">
                     <Link
                       className="py-[7px] px-2.5 inline-flex items-center font-medium text-sm rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 focus:outline-none focus:bg-gray-100 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                      href="/login"
+                      href="/auth/login"
                     >
                       Log in
                     </Link>
                     <Link
                       className="py-2 px-2.5 inline-flex items-center font-medium text-sm rounded-lg bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:bg-blue-600"
-                      href="/signup"
+                      href="/auth/signup"
                     >
                       Sign up
                     </Link>

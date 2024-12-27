@@ -1,5 +1,4 @@
 "use client";
-
 import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
@@ -12,13 +11,13 @@ const page = () => {
   const verifyEmail = async () => {
     try {
       let reuslt = await axios({
+        method: "PATCH",
         url: `http://localhost:9000/user/verify-email`,
-        method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      router.push("/login");
+      router.push("/auth/login");
     } catch (error) {}
   };
   useEffect(() => {
