@@ -12,7 +12,7 @@ const Footer = () => {
           <div>
             <Link href="/" className="flex items-center gap-4 mb-4">
               <img
-                src="/logo.webp"
+                src="/logo.png"
                 alt="SkillSphare Logo"
                 className="h-12 w-12 rounded-full"
               />

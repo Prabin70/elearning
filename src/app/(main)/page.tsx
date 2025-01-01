@@ -1,11 +1,10 @@
-import { Hind } from "next/font/google";
-
 import Enrolled from "@/components/Enrolled";
 import Hero from "@/components/Hero";
 import Section from "@/components/Section";
 import Testimonials from "@/components/Testinominals";
 import Footer from "@/layout/Footer";
 import Navbar from "@/layout/Navbar";
+import { Hind } from "next/font/google";
 
 const hindMysuru = Hind({
   subsets: ["latin"],

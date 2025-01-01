@@ -5,6 +5,7 @@ const page = () => {
     image: string;
     title: string;
     description: string;
+    path: string;
   };
 
   const tutorials: Tutorial[] = [
@@ -14,6 +15,7 @@ const page = () => {
       title: "HTML",
       description:
         "Encourage students to give and receive constructive peer feedback to enhance the learning experience..",
+      path: "/tutorial/html",
     },
     {
       id: 2,
@@ -21,6 +23,7 @@ const page = () => {
       title: "CSS",
       description:
         "Provide personalized feedback on student submissions directly from instructors. directly from instructors.",
+      path: "/tutorial/css",
     },
     {
       id: 3,
@@ -28,6 +31,7 @@ const page = () => {
       title: "JavaScript",
       description:
         "Create a space where learners can engage in discussions, ask questions, and share insights",
+      path: "/tutorial/js",
     },
     {
       id: 4,
@@ -35,6 +39,7 @@ const page = () => {
       title: "Node.js",
       description:
         "Enable groups to review each other's group work promoting collaborative feedback.collaborative feedback.",
+      path: "/tutorial/nodejs",
     },
     {
       id: 5,
@@ -42,6 +47,7 @@ const page = () => {
       title: "React",
       description:
         "Collect information with customizable forms to streamline communication and data collection.",
+      path: "/tutorial/react",
     },
     {
       id: 6,
@@ -49,6 +55,7 @@ const page = () => {
       title: "MongoDB",
       description:
         "Promote collaboration by allowing students to discuss their group work and receive feedback.",
+      path: "/tutorial/mongodb",
     },
     {
       id: 7,
@@ -56,6 +63,7 @@ const page = () => {
       title: "Tailwind",
       description:
         "Encourage students to create a discussion board to foster collaboration and communication.",
+      path: "/tutorial/tailwind",
     },
     {
       id: 8,
@@ -63,6 +71,7 @@ const page = () => {
       title: "ReduxToolKit",
       description:
         "Manage multiple branches with unique branding, courses, and user roles—all from one platform.",
+      path: "/tutorial/redux",
     },
   ];
 
@@ -107,7 +116,12 @@ const page = () => {
                   </p>
                 </div>
                 <div className="flex items-center justify-center mb-5  ">
-                  <button className="px-2 py-1 bg-blue-700 hover:bg-blue-800 transition-all rounded-md text-white  ">
+                  <button
+                    className="px-2 py-1 bg-blue-700 hover:bg-blue-800 transition-all rounded-md text-white"
+                    onClick={() => {
+                      window.location.href = tutorials.path;
+                    }}
+                  >
                     Start Learning
                   </button>
                 </div>
